@@ -16,7 +16,7 @@ export type LoginResponse = {
 
 export async function login(
   email: string,
-  password: string
+  password: string,
 ): Promise<LoginResponse> {
   return request<LoginResponse>("/api/v1/auth/login", {
     method: "POST",
@@ -40,4 +40,16 @@ export async function logout(token: string): Promise<void> {
   } catch {
     // Best-effort — swallow errors
   }
+}
+
+export async function signup(
+  fullName: string,
+  email: string,
+  password: string,
+  passwordConfirmation: string,
+): Promise<LoginResponse> {
+  return request<LoginResponse>("/api/v1/auth/signup", {
+    method: "POST",
+    body: JSON.stringify({ fullName, email, password, passwordConfirmation }),
+  });
 }

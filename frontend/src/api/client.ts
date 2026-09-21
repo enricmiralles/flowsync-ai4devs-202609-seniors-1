@@ -8,10 +8,7 @@ export class ApiError extends Error {
   status: number;
   fieldErrors: ApiFieldError[];
 
-  constructor(
-    status: number,
-    fieldErrors: ApiFieldError[]
-  ) {
+  constructor(status: number, fieldErrors: ApiFieldError[]) {
     super(fieldErrors[0]?.message ?? `API error: ${status}`);
     this.status = status;
     this.fieldErrors = fieldErrors;
@@ -22,7 +19,7 @@ const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3333";
 
 export async function request<T>(
   path: string,
-  options: RequestInit & { token?: string } = {}
+  options: RequestInit & { token?: string } = {},
 ): Promise<T> {
   const { token, ...fetchOptions } = options;
 

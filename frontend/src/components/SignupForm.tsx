@@ -20,6 +20,12 @@ export function SignupForm() {
     e.preventDefault();
     setFormError(null);
     setFieldErrors({});
+
+    if (password !== passwordConfirmation) {
+      setFieldErrors({ passwordConfirmation: "Passwords do not match" });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {

@@ -44,11 +44,12 @@ export async function request<T>(
     headers,
   });
 
+  const body = await response.json();
+
   if (!response.ok) {
-    const data = await response.json();
-    const errors = data.errors || [];
+    const errors = body.errors || [];
     throw new ApiError(response.status, errors);
   }
 
-  return response.json() as Promise<T>;
+  return body.data as T;
 }
